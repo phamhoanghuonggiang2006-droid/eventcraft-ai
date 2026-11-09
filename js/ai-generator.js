@@ -84,9 +84,9 @@ function generateLandingPage() {
             localStorage.setItem('vibe_event_config', JSON.stringify({ eventName, eventDate, eventLocation, speaker, offer }));
         } catch(e) {}
 
-        // Tự động kích hoạt hàm Mock AI đã viết từ trước để thay thế text Landing Page
+        // TRUYỀN DỮ LIỆU INPUT VÀO HÀM AI
         if (typeof mockAiGenerate === 'function') {
-            mockAiGenerate();
+            mockAiGenerate(eventName, eventDate, eventLocation);
         }
         
         if (typeof showToast === 'function') showToast("Đã tạo Landing Page thành công!");
@@ -96,48 +96,107 @@ function generateLandingPage() {
 /**
  * 2. Hàm Mock AI Auto-Generate
  */
-function mockAiGenerate() {
+function mockAiGenerate(eventName = "VIBE-CODING", eventDate = null, eventLocation = "TP.HCM") {
+    if (arguments.length === 0 || !eventName) {
+        try {
+            const savedConfig = JSON.parse(localStorage.getItem('vibe_event_config') || '{}');
+            eventName = savedConfig.eventName || "VIBE-CODING";
+            eventDate = eventDate || savedConfig.eventDate || null;
+            eventLocation = eventLocation || savedConfig.eventLocation || "TP.HCM";
+        } catch(e) {
+            eventName = "VIBE-CODING";
+            eventLocation = "TP.HCM";
+        }
+    }
+
     const btn = document.getElementById('btn-mock-ai');
-    if (!btn) return;
+    if (btn) {
+        btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Đang sinh nội dung...`;
+        btn.classList.add('opacity-50', 'pointer-events-none');
+    }
 
-    // Hiệu ứng Loading
-    const originalText = btn.innerHTML;
-    btn.innerHTML = `
-        <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-        Đang kết nối AI...
-    `;
-    btn.disabled = true;
-
-    // Giả lập độ trễ kết nối API (1.5 giây)
     setTimeout(() => {
-        // Cập nhật Hero Section với Typography thích ứng chống lỗi font
-        updateHeroHeadline("KỶ NGUYÊN TỰ ĐỘNG HÓA VỚI AI AGENT ĐỘT PHÁ");
+        // 1. Cập nhật Headline (Ép hiển thị tối đa 2 dòng - line-clamp-2 để chống vỡ layout)
+        const headline = document.getElementById('ai-headline') || document.getElementById('heroHeadline');
+        if (headline) {
+            headline.innerText = eventName.toUpperCase();
+            headline.className = "text-5xl md:text-7xl font-bold text-white mb-6 font-['Space_Grotesk'] leading-tight uppercase line-clamp-2 break-words";
+        }
+
+        // 2. Cập nhật Mô tả (Mix dữ liệu người dùng với văn phong AI)
         const desc = document.getElementById('ai-description') || document.getElementById('heroDescription');
-        if (desc) desc.innerText = "Nền tảng thi đấu lập trình trực tiếp quy tụ 500+ kỹ sư toàn cầu, kiến tạo giải pháp thông minh vượt qua ranh giới công nghệ truyền thống.";
+        if (desc) {
+            desc.innerText = `Sự kiện "${eventName}" tổ chức tại ${eventLocation}. Bứt phá giới hạn lập trình truyền thống, biến tư duy chiến lược và ý tưởng kinh doanh thành sản phẩm thực tế.`;
+        }
+        
+        // 3. Cập nhật Lợi ích
+        const bullet1 = document.getElementById('ai-bullet-1');
+        if (bullet1) bullet1.innerText = `🚀 Khai phá sức mạnh công nghệ tại ${eventLocation}.`;
 
-        // Cập nhật 3 Thẻ Giá trị
-        const b1 = document.getElementById('ai-bullet-1');
-        const b2 = document.getElementById('ai-bullet-2');
-        const b3 = document.getElementById('ai-bullet-3');
-        if (b1) b1.innerText = "Trợ lý AI tự sinh mã nguồn và tối ưu hóa hệ thống backend theo thời gian thực.";
-        if (b2) b2.innerText = "Môi trường phát triển sandbox bảo mật cao, kết nối trực tiếp với cụm GPU đám mây.";
-        if (b3) b3.innerText = "Hệ thống chấm điểm tự động đa tiêu chí, trả kết quả chỉ trong 10 giây.";
+        // 4. Kích hoạt Đồng hồ đếm ngược động (Dynamic Countdown)
+        if (eventDate) {
+            startDynamicCountdown(eventDate);
+        }
 
-        // Khôi phục trạng thái nút bấm
-        btn.innerHTML = `
-            <svg class="w-4 h-4 text-[#CCFF00]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            Đã cập nhật nội dung!
-        `;
-        btn.classList.add('bg-black', 'text-[#CCFF00]', 'border', 'border-[#CCFF00]');
-        btn.classList.remove('bg-[#CCFF00]', 'text-black');
-
-        setTimeout(() => {
-            btn.innerHTML = originalText;
-            btn.classList.remove('bg-black', 'text-[#CCFF00]', 'border', 'border-[#CCFF00]');
-            btn.classList.add('bg-[#CCFF00]', 'text-black');
-            btn.disabled = false;
-        }, 2000);
+        if (btn) {
+            btn.innerHTML = `Đã tạo xong!`;
+            btn.classList.replace('bg-[#CCFF00]', 'bg-green-500');
+            setTimeout(() => {
+                btn.innerHTML = `AI Auto-Generate`;
+                btn.classList.replace('bg-green-500', 'bg-[#CCFF00]');
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+            }, 2000);
+        }
     }, 1500);
+}
+
+// 5. HÀM CHẠY ĐỒNG HỒ ĐẾM NGƯỢC THỰC TẾ DỰA VÀO INPUT
+let countdownInterval;
+function startDynamicCountdown(targetDateString) {
+    clearInterval(countdownInterval); // Xóa đồng hồ cũ nếu có
+    if (typeof countdownTimerId !== 'undefined' && countdownTimerId) clearInterval(countdownTimerId);
+    const targetDate = new Date(targetDateString).getTime();
+
+    // Cập nhật nhãn ngày mục tiêu nếu có
+    const targetLabel = document.getElementById('countdown-target-date');
+    if (targetLabel && targetDateString) {
+        const d = new Date(targetDateString);
+        if (!isNaN(d.getTime())) {
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            const hours = String(d.getHours()).padStart(2, '0');
+            const minutes = String(d.getMinutes()).padStart(2, '0');
+            targetLabel.innerText = `${day}.${month}.${year} ${hours}:${minutes}`;
+        }
+    }
+
+    const updateTimer = () => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const dEl = document.getElementById('days');
+        const hEl = document.getElementById('hours');
+        const mEl = document.getElementById('minutes');
+        const sEl = document.getElementById('seconds');
+
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            if (dEl) dEl.innerText = "00";
+            if (hEl) hEl.innerText = "00";
+            if (mEl) mEl.innerText = "00";
+            if (sEl) sEl.innerText = "00";
+            return;
+        }
+
+        if (dEl) dEl.innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+        if (hEl) hEl.innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+        if (mEl) mEl.innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+        if (sEl) sEl.innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
+    };
+
+    updateTimer();
+    countdownInterval = setInterval(updateTimer, 1000);
 }
 
 // Global exports
@@ -145,5 +204,6 @@ if (typeof window !== 'undefined') {
     window.updateHeroHeadline = updateHeroHeadline;
     window.generateLandingPage = generateLandingPage;
     window.mockAiGenerate = mockAiGenerate;
+    window.startDynamicCountdown = startDynamicCountdown;
 }
 
