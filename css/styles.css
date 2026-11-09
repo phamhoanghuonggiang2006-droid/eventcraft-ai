@@ -1,0 +1,156 @@
+/* ==========================================================================
+   EventCraft AI - Main Stylesheet (css/styles.css)
+   Design System: Dark Tech, Glassmorphism & Cyber Lime (#CCFF00)
+   ========================================================================== */
+
+/* -------------------------------------------------------------
+   1. IMPORT FONT LOCAL QUA CSS @FONT-FACE
+   - "Roller Coaster": CHỈ DÙNG CHO TIÊU ĐỀ H1 (ENGLISH) & SỐ COUNTDOWN
+   - "lfneofolia": CHỈ DÙNG CHO TEXT EASTER EGG VIP
+   - "Inter": DÙNG CHO TOÀN BỘ TIẾNG VIỆT, BENTO GRID, MÔ TẢ & FORM
+   ------------------------------------------------------------- */
+@font-face {
+    font-family: 'Roller Coaster';
+    src: url('../fonts/Roller%20Coaster.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'lfneofolia';
+    src: url('../fonts/lfneofolia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* -------------------------------------------------------------
+   2. NỀN OBSIDIAN & TYPOGRAPHY CHUẨN INTER
+   ------------------------------------------------------------- */
+body {
+    background-color: #09090B;
+    color: #F5F5F7;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* -------------------------------------------------------------
+   3. LIQUID GLASS CHUẨN (TINH GỌN - XÓA BỎ OVER-GLOWING)
+   - Nền Translucent Navy (rgba(26, 34, 53, 0.60))
+   - Backdrop-blur-md
+   - Viền xám siêu mỏng border-white/10
+   ------------------------------------------------------------- */
+.liquid-glass {
+    background-color: rgba(26, 34, 53, 0.60);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 24px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass-subtle {
+    background-color: rgba(26, 34, 53, 0.40);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+/* Nút CTA Cyber Lime nổi bật, tinh tế */
+.btn-cyber-lime {
+    background-color: #CCFF00;
+    color: #09090B;
+    font-weight: 700;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-cyber-lime:hover {
+    box-shadow: 0 0 25px rgba(204, 255, 0, 0.45);
+    transform: translateY(-2px);
+}
+.btn-cyber-lime:active {
+    transform: translateY(0);
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: marquee 28s linear infinite;
+}
+.animate-marquee:hover,
+.group:hover .animate-marquee {
+    animation-play-state: paused;
+}
+
+/* CSS Lơ Lửng Tự Nhiên (Levitation Animation) */
+@keyframes float-levitate {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+.animate-float {
+    animation: float-levitate 6s ease-in-out infinite;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* CSS Lơ Lửng Ngược Nhịp (Float Offset) */
+@keyframes float-offset {
+    0% { transform: translateY(-8px) rotate(-1deg); }
+    50% { transform: translateY(4px) rotate(0deg); }
+    100% { transform: translateY(-8px) rotate(-1deg); }
+}
+.animate-float-offset {
+    animation: float-offset 5s ease-in-out infinite;
+}
+
+/* CSS Đốm Sáng Holographic Mờ Ảo Ở Nền */
+.bg-glow-holographic {
+    background: radial-gradient(circle, rgba(176,38,255,0.12) 0%, rgba(0,229,255,0.08) 50%, transparent 100%);
+    filter: blur(80px);
+    pointer-events: none;
+}
+
+/* Hỗ trợ dải sóng mềm mại & Radial Gradient cho The Fluid Symphony */
+.border-gradient-to-r { 
+    border-image: linear-gradient(to right, transparent, var(--tw-gradient-stops), transparent) 1; 
+}
+.border-gradient-to-tr { 
+    border-image: linear-gradient(to top right, transparent, var(--tw-gradient-stops), transparent) 1; 
+}
+.bg-radial {
+    background: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Input Form Liquid Glass */
+.input-glass:focus {
+    border-color: rgba(204, 255, 0, 0.6);
+    box-shadow: 0 0 15px rgba(204, 255, 0, 0.2);
+    outline: none;
+}
+
+/* Smooth Scroll & No-Scrollbar */
+html {
+    scroll-behavior: smooth;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
