@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bảng Kiểm Thử Dự Án - VIBE-CODING 2026 Track B</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 40px; color: #1a1a1a; line-height: 1.5; }
+        h1 { color: #0d1117; border-bottom: 2px solid #000; padding-bottom: 8px; margin-bottom: 16px; font-size: 24px; }
+        .meta { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; margin-bottom: 24px; }
+        .meta p { margin: 4px 0; font-size: 14px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 13px; }
+        th, td { border: 1px solid #d0d7de; padding: 10px 12px; text-align: left; vertical-align: top; }
+        th { background: #f6f8fa; font-weight: 600; }
+        .status-pass { color: #1a7f37; font-weight: bold; background: #dafbe1; padding: 3px 8px; border-radius: 4px; display: inline-block; }
+        .summary { margin-top: 24px; padding: 16px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; font-size: 14px; }
+        @media print { body { margin: 20px; } }
+    </style>
+</head>
+<body>
+    <h1>BẢNG KIỂM THỬ TÍNH NĂNG (TEST MATRIX)</h1>
+    <div class="meta">
+        <p><strong>Cuộc thi:</strong> VIBE-CODING 2026 • Track B: Economic</p>
+        <p><strong>Dự án:</strong> EventCraft AI - Landing Page & Submission Hub</p>
+        <p><strong>Đội thi:</strong> Three's (Thí sinh: Hoàng Hương Giang)</p>
+        <p><strong>Repository GitHub:</strong> https://github.com/phamhoanghuonggiang2006-droid/eventcraft-ai</p>
+        <p><strong>Public URL:</strong> https://phamhoanghuonggiang2006-droid.github.io/eventcraft-ai/</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 8%;">Mã TC</th>
+                <th style="width: 22%;">Kịch bản / Tính năng</th>
+                <th style="width: 25%;">Dữ liệu & Hành vi kiểm thử</th>
+                <th style="width: 33%;">Kết quả kỳ vọng</th>
+                <th style="width: 12%;">Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>TC01</strong></td>
+                <td>Màn hình Setup Form ban đầu</td>
+                <td>Truy cập lần đầu hoặc sau khi Reset</td>
+                <td>Màn hình khởi tạo (Setup Screen) hiện nổi bật, khóa cuộn trang (overflow: hidden). Chỉ mở trang sau khi tạo thành công.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC02</strong></td>
+                <td>Xác thực Form Khởi Tạo (Validation)</td>
+                <td>Bỏ trống Tên sự kiện / Chọn ngày quá khứ / Bỏ trống Địa điểm</td>
+                <td>Hệ thống chặn submit, hiển thị thông báo lỗi Toast tương ứng, yêu cầu nhập ngày ở tương lai.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC03</strong></td>
+                <td>Sinh nội dung & Chống vỡ layout</td>
+                <td>Nhập Tên sự kiện dài, Địa điểm và bấm Tạo Landing Page</td>
+                <td>Title hiển thị chuẩn Space Grotesk, ép tối đa 2 dòng (line-clamp-2, break-words), nội dung mô tả & lợi ích hòa trộn địa điểm.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC04</strong></td>
+                <td>Đồng hồ đếm ngược động (Countdown)</td>
+                <td>Chọn ngày giờ sự kiện trong tương lai (datetime-local)</td>
+                <td>Đồng hồ tính toán khoảng cách mili-giây, nhảy số thời gian thực mỗi giây (Ngày, Giờ, Phút, Giây) chuẩn xác.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC05</strong></td>
+                <td>Đồng bộ Realtime Đa Tab (Storage Event)</td>
+                <td>Đăng ký vé tại Tab 1 và quan sát Tab 2</td>
+                <td>Bộ đếm số người đăng ký ở Tab 2 tự động tăng số ngay lập tức mà không cần F5 trang nhờ lắng nghe window storage event.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC06</strong></td>
+                <td>Trạm thử thách & Workspace Đội thi</td>
+                <td>Đăng nhập hệ thống, chuyển đổi tab Workspace</td>
+                <td>Sidebar điều hướng linh hoạt giữa Tổng quan, Quản lý Đội thi, Trạm Thử Thách, Cổng nộp bài; ẩn AI panel nổi; copy invite code và API key mượt mà.</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+            <tr>
+                <td><strong>TC07</strong></td>
+                <td>Hard Reset Dữ liệu & Kịch bản chấm điểm</td>
+                <td>Bấm "Tạo trang mới (Reset)" ở góc dưới bên trái</td>
+                <td>Hộp thoại xác nhận hiện ra, xóa sạch localStorage/sessionStorage và tự động reload trang về trạng thái Setup Screen ban đầu (TC01).</td>
+                <td><span class="status-pass">PASSED</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <strong>Tổng kết kiểm thử:</strong> 7/7 Test Cases đạt chuẩn (100% Passed). Toàn bộ hệ sinh thái EventCraft AI hoạt động ổn định, mượt mà trên chuẩn Dark Tech Design System.
+    </div>
+</body>
+</html>

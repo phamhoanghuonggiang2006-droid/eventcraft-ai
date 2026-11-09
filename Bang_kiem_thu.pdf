@@ -1,0 +1,63 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 735 >>
+stream
+BT
+/F1 18 Tf
+50 740 Td
+(BANG KIEM THU DU AN - VIBE-CODING 2026 TRACK B) Tj
+/F1 11 Tf
+0 -30 Td
+(Du an: EventCraft AI - San pham Du thi Track B: Economic) Tj
+0 -18 Td
+(Doi thi: Three's | Thi sinh: Pham Hoang Huong Giang) Tj
+0 -18 Td
+(Repository: https://github.com/phamhoanghuonggiang2006-droid/eventcraft-ai) Tj
+0 -18 Td
+(Public Link: https://phamhoanghuonggiang2006-droid.github.io/eventcraft-ai/) Tj
+0 -30 Td
+(========================================================================) Tj
+0 -20 Td
+(TC01: Man hinh Setup Form ban dau - PASSED) Tj
+0 -16 Td
+(TC02: Xac thuc Form Khoi Tao [Strict Validation] - PASSED) Tj
+0 -16 Td
+(TC03: Sinh noi dung AI & Bao ve Layout 2 dong - PASSED) Tj
+0 -16 Td
+(TC04: Dong ho dem nguoc dong [Dynamic Countdown] - PASSED) Tj
+0 -16 Td
+(TC05: Dong bo Realtime Da Tab qua LocalStorage Event - PASSED) Tj
+0 -16 Td
+(TC06: Tram thu thach & Workspace ca nhan hoa Dark Tech - PASSED) Tj
+0 -16 Td
+(TC07: Hard Reset LocalStorage & Tai tao kich ban - PASSED) Tj
+0 -30 Td
+(Tong ket: 7/7 Test Cases Dat 100% chuan tieu chi The le VIBE-CODING 2026.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000244 00000 n 
+0000001032 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1103
+%%EOF
